@@ -1,0 +1,19 @@
+{
+    "Cities": [
+        {
+            "name": "Bali",
+            "bounding_box": [
+                "-8.04968577",
+                "114.3502976",
+                "-8.85186802",
+                "115.76261798"
+            ],
+            "country": "Indonesia",
+            "articles": "editorial content placeholder",
+            "image": {
+                "url": "http://en.m.wikivoyage.org/wiki/pura.jpg",
+                "file": "40d37b0c10a132192de56bb930e68f6265a7f330.jpg"
+            }
+        }
+    ]    
+}
