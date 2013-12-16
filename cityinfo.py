@@ -21,7 +21,19 @@ def main():
             default = sys.stdin
             )
 
+    parser.add_argument(
+            '-t',
+            '--test',
+            help='run the doctest suite and exit',
+            action='store_true'
+            )
+
     args = parser.parse_args()
+
+    if args.test:
+        import doctest
+        doctest.testmod()
+        exit(0)
 
     jsonguide = json.load(args.guide)
     info = cityinfo(jsonguide)
@@ -30,7 +42,17 @@ def main():
 
 
 def cityinfo(jsonguide):
-    """ return the city name and the bounding box, separated by a ';'."""
+    """
+    return the city name and the bounding box, separated by a ';'.
+
+    EXAMPLE
+    =======
+
+    >>> jsonguide = json.load(open('./test/inguide.json','r'))
+    >>> cityinfo(jsonguide)
+    'Bali;-8.04968577,114.3502976,-8.85186802,115.76261798'
+
+    """
     city = jsonguide['Cities'][0]['name']
     bb = ",".join(jsonguide['Cities'][0]['bounding_box'])
     res = ";".join([city,bb])
