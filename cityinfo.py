@@ -14,7 +14,7 @@ def main():
 
     parser.add_argument(
             'guide',
-            help='guide from which the cityname and the country name'\
+            help='path to guide from which the cityname and the country name'\
                     ' will be extracted. Defaults to stdin if absent',
             type = argparse.FileType('r'),
             nargs = '?',
