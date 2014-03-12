@@ -3,6 +3,8 @@
 import json
 import argparse
 import sys
+import logging
+import iso3166
 
 # takes a guide file and returns it's city name and country.
 
@@ -40,6 +42,51 @@ def main():
     print(info)
     return
 
+def filecityinfo(filename):
+    """
+    same as cityinfo but act on a filename rather then a guide content.
+    """
+
+    jsonguide = None
+    with open(filename,'r') as g:
+        jsonguide = json.load(g)
+
+    if not jsonguide:
+        return None
+
+    res = cityinfo(jsonguide)
+    return res
+
+def filecountryinfo(filename):
+    """
+    Returns the country code (iso3166 alpha2) of the city-guide found at
+    filename.
+    """
+
+    guide_data = load_guide(filename)
+
+    # get the country key.
+    country = guide_data['Cities'][0].get("country",None)
+
+    country_code = country
+    try:
+        country_code = iso3166.countries[country].alpha2
+    except:
+        pass
+
+    return country_code
+
+def load_guide(filename):
+    """
+    returns the datastructure constructed from the json guide found at
+    filename.
+    """
+
+    guide = None
+    with open(filename,'r') as g:
+        guide = json.load(g)
+
+    return guide
 
 def cityinfo(jsonguide):
     """
